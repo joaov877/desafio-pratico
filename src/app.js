@@ -9,6 +9,8 @@ const routes = require('./routes');
 const errorHandler = require('./middlewares/error-handler');
 const notFound = require('./middlewares/not-found');
 
+const { register, metricsMiddleware } = require("./config/metrics")
+
 const app = express();
 
 // Security headers
@@ -16,6 +18,7 @@ app.use(helmet());
 
 // CORS
 app.use(cors());
+app.use(metricsMiddleware)
 
 // Rate limiting
 if (!env.isTest()) {
@@ -56,6 +59,15 @@ app.get('/health', (req, res) => {
     uptime: process.uptime(),
   });
 });
+
+app.get("/metrics", async (req, res, next) => {
+  try {
+    res.setHeader("Content-Type", register.contentType)
+    res.end(await register.metrics())
+  } catch (error) {
+    next(error)
+  }
+})
 
 // API routes
 app.use('/api/v1', routes);
