@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
+    "lint": "eslint .",
+    "typecheck": "echo \"Projeto em JS puro, sem typecheck\" && exit 0",
     "migrate": "node src/database/migrations.js",
     "seed": "node src/database/seeds.js",
     "test": "jest --forceExit --detectOpenHandles",
