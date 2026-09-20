@@ -5,7 +5,7 @@ const { AppError } = require('../errors');
  * Global error handling middleware.
  * Catches all errors, formats the response, and logs appropriately.
  */
-// eslint-disable-next-line no-unused-vars
+
 const errorHandler = (err, req, res, _next) => {
   // Joi validation errors
   if (err.isJoi) {

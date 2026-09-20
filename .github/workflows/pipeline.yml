@@ -133,7 +133,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U postgres -d ecommerce"
+          --health-cmd "pg_isready -U ecommerce -d ecommerce"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -158,13 +158,13 @@ jobs:
           npm run start > api.log 2>&1 &
           
           echo "Aguardando a resposta da API no endpoint de health check..."
-          npx wait-on http://localhost:3000/api/health --timeout 45000 --interval 2000
+          npx wait-on http://localhost:3000/health --timeout 45000 --interval 2000
         env:
           NODE_ENV: development
           PORT: 3000
           DB_HOST: localhost
           DB_PORT: 5432
-          DB_USERNAME: ecommerce
+          DB_USER: ecommerce
           DB_PASSWORD: ecommerce123
           DB_NAME: ecommerce
 
