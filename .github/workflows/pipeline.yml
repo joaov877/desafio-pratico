@@ -210,21 +210,26 @@ jobs:
           # Pula checagens de monitoramento/auditoria rígidas que não se aplicam ao LocalStack
           skip_check: >-
             CKV_AWS_8,
+            CKV_AWS_18,
             CKV_AWS_21,
             CKV_AWS_79,
             CKV_AWS_126,
             CKV_AWS_130,
             CKV_AWS_135,
             CKV_AWS_144,
+            CKV_AWS_145,
             CKV_AWS_356,
             CKV2_AWS_11,
             CKV2_AWS_12,
             CKV2_AWS_19,
-            CKV2_AWS_41
-          # Justificativa técnica dos escopos ignorados:
-          # - CKV_AWS_8, 79, 135: Desativados devido a limitações de simulação de hardware do LocalStack
-          # - CKV_AWS_130: Subnet pública obrigatória por design para expor a API Node.js
-          # - CKV_AWS_21, 144, 356, CKV2_AWS_11, 12, 19: Auditorias corporativas de rede redundantes para fins locais
+            CKV2_AWS_41,
+            CKV2_AWS_61,
+            CKV2_AWS_62
+                    # Exceções justificadas para o ambiente acadêmico com LocalStack:
+          # - EC2 e rede: limitações da simulação local.
+          # - S3: lifecycle, notificações, access logging e KMS não são
+          #   necessários porque o bucket é apenas demonstrativo.
+          # - Em um ambiente AWS de produção, essas verificações devem ser habilitadas.
 
 
   # =========================================================================
